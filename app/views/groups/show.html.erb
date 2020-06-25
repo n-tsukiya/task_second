@@ -1,0 +1,10 @@
+<h1>Groups#show(グループ詳細)</h1>
+<p>Find me in app/views/groups/show.html.erb</p>
+<hr>
+
+<p><span>グループ名: </span><%= @group.title %></p>
+<hr>
+
+<% @users.each do |user| %>
+  <p><span>参加ユーザーメアド: </span><%= link_to user.email, user_path(user.id) %></p>
+<% end %>

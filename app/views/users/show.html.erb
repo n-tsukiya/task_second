@@ -1,0 +1,12 @@
+<h1>Users#show(マイページ)</h1>
+<p>Find me in app/views/users/show.html.erb</p>
+<hr>
+
+<p><span>ログインユーザー名　　: </span><%= link_to @user.username, user_path(@user.id) %></p>
+<p><span>ログインユーザーメアド: </span><%= link_to @user.email, user_path(@user.id) %></p>
+<hr>
+
+<% @groups.each do |group| %>
+  <p><span>参加グループ名: </span><%=link_to group.title, group_path(group.id) %></p>
+  <hr>
+<% end %>

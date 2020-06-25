@@ -1,0 +1,13 @@
+<h1>Groups#new(新規グループ作成)</h1>
+<p>Find me in app/views/groups/new.html.erb</p>
+
+<%= form_with(model: @group, local: true) do |form| %>
+  <p>
+    <%= form.label :title, "グループ名" %>
+    <%= form.text_field :title %>
+    <br>
+    <%= form.label :color, "グループの色" %>
+    <%= form.text_field :color %>
+  </p>
+  <%= form.submit %>
+<% end %>

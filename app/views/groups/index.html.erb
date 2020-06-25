@@ -1,0 +1,18 @@
+<h1>Groups#index(グループ一覧)</h1>
+<p>Find me in app/views/groups/index.html.erb</p>
+<hr>
+
+<% @groups.each do |group| %>
+  <p><span>グループ名: </span><%= link_to group.title, groups_path(group.id) %></p>
+
+  <% if user_signed_in? %>
+    <% if group.grouped_by?(current_user) %>
+      <p><span>グループを退会: </span><%= link_to group.user_groups.count, group_user_groups_path(group.id), method: :delete %></p>
+    <% else %>
+      <p><span>グループに参加: </span><%= link_to group.user_groups.count, group_user_groups_path(group.id), method: :post %></p>
+    <% end %>
+  <% else %>
+    <p><span>参加人数: </span><%= group.user_groups.count %></p>
+  <% end %>
+  <hr>
+<% end %>
