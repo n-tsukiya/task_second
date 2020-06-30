@@ -1,3 +1,5 @@
+  <%= stylesheet_link_tag 'groups', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <h1>Groups#index(グループ一覧)</h1>
 <p>Find me in app/views/groups/index.html.erb</p>
 <hr>
@@ -15,4 +17,16 @@
     <p><span>参加人数: </span><%= group.user_groups.count %></p>
   <% end %>
   <hr>
+<% end %>
+
+<h2>グループ新規作成</h2>
+<%= form_with(model: @group, url: groups_path, local: true) do |form| %>
+  <p>
+    <%= form.label :title, "グループ名" %>
+    <%= form.text_field :title %>
+    <br>
+    <%= form.label :color, "グループの色" %>
+    <%= form.text_field :color %>
+  </p>
+  <%= form.submit %>
 <% end %>
