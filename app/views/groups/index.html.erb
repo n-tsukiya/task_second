@@ -1,32 +1,129 @@
   <%= stylesheet_link_tag 'groups', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<h1>Groups#index(グループ一覧)</h1>
+<%# <h1>Groups#index(グループ一覧)</h1>
 <p>Find me in app/views/groups/index.html.erb</p>
-<hr>
+<hr> %>
 
-<% @groups.each do |group| %>
-  <p><span>グループ名: </span><%= link_to group.title, groups_path(group.id) %></p>
+<div class="aside">
+  <div class="check">
+    <input type="checkbox" id="test">
+    <h2>ホーム</h2>
+  </div>
 
-  <% if user_signed_in? %>
-    <% if group.grouped_by?(current_user) %>
-      <p><span>グループを退会: </span><%= link_to group.user_groups.count, group_user_groups_path(group.id), method: :delete %></p>
+  <div class="hidden_box">
+    <label for="label1">>マイグループ</label>
+    <input type="checkbox" id="label1">
+    <div class="hidden_show">
+      <ul class="gnav">
+        <% @groups.each do |group| %>
+          <li>
+            <%= link_to group.title, groups_path(group.id) %>
+            <ul>
+              <li>
+                <input type="checkbox" id="label1-1">
+                <a href="">リスト1</a>
+              </li>
+              <li><a href="">サンプルリスト2</a></li>
+              <li><a href="">サンプルリスト3</a></li>
+              <li><a href="">サンプルリスト4</a></li>
+              <li><a href="">サンプルリスト5</a></li>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="check">
+    <%# <input type="checkbox" id="test"/> %>
+    <h2>何かいれるかも</h2>
+  </div>
+
+  <div class="hidden_box">
+    <label for="label2">>全グループ</label>
+    <input type="checkbox" id="label2">
+    <div class="hidden_show">
+      <ul class="gnav">
+        <% @groups.each do |group| %>
+          <li>
+            <%= link_to group.title, groups_path(group.id) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="check">
+    <%# <input type="checkbox" id="test"/> %>
+    <h2>グループ新規作成</h2>
+  </div>
+
+
+
+  <% if false %>
+
+  <% @groups.each do |group| %>
+    <p><span>グループ名: </span><%= link_to group.title, groups_path(group.id) %></p>
+
+    <% if user_signed_in? %>
+      <% if group.grouped_by?(current_user) %>
+        <p><span>グループを退会: </span><%= link_to group.user_groups.count, group_user_groups_path(group.id), method: :delete %></p>
+      <% else %>
+        <p><span>グループに参加: </span><%= link_to group.user_groups.count, group_user_groups_path(group.id), method: :post %></p>
+      <% end %>
     <% else %>
-      <p><span>グループに参加: </span><%= link_to group.user_groups.count, group_user_groups_path(group.id), method: :post %></p>
+      <p><span>参加人数: </span><%= group.user_groups.count %></p>
     <% end %>
-  <% else %>
-    <p><span>参加人数: </span><%= group.user_groups.count %></p>
+    <hr>
   <% end %>
-  <hr>
-<% end %>
 
-<h2>グループ新規作成</h2>
-<%= form_with(model: @group, url: groups_path, local: true) do |form| %>
-  <p>
-    <%= form.label :title, "グループ名" %>
-    <%= form.text_field :title %>
-    <br>
-    <%= form.label :color, "グループの色" %>
-    <%= form.text_field :color %>
-  </p>
-  <%= form.submit %>
-<% end %>
+  <h2>グループ新規作成</h2>
+  <%= form_with(model: @group, url: groups_path, local: true) do |form| %>
+    <p>
+      <%= form.label :title, "グループ名" %>
+      <%= form.text_field :title %>
+      <br>
+      <%= form.label :color, "グループの色" %>
+      <%= form.text_field :color %>
+    </p>
+    <%= form.submit %>
+  <% end %>
+
+  <% end %>
+
+</div>
+
+
+
+
+
+
+<!-- -------------------------------------------------------------------------------- -->
+
+
+<div class="todo">
+  <h3>todo</h3>
+  <hr>
+  <div class="sample">
+    <h4>サンプルタイトル</h4>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo odio accusamus quasi iure. Eum facilis temporibus explicabo inventore autem optio, sit, libero modi, quisquam distinctio suscipit hic molestiae sapiente! Laudantium.</p>
+  </div>
+</div>
+
+<div class="doing">
+  <h3>doing</h3>
+  <hr>
+  <div class="sample">
+    <h4>サンプルタイトル</h4>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo odio accusamus quasi iure. Eum facilis temporibus explicabo inventore autem optio, sit, libero modi, quisquam distinctio suscipit hic molestiae sapiente! Laudantium.</p>
+  </div>
+</div>
+
+<div class="done">
+  <h3>done</h3>
+  <hr>
+  <div class="sample">
+    <h4>サンプルタイトル</h4>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo odio accusamus quasi iure. Eum facilis temporibus explicabo inventore autem optio, sit, libero modi, quisquam distinctio suscipit hic molestiae sapiente! Laudantium.</p>
+  </div>
+</div>

@@ -1,3 +1,135 @@
-p {
-  color: green;
+
+.aside {
+  position: relative;
+  z-index: 10;
+  border: 1px solid #000;
+}
+
+/* チェックマークの位置 */
+.aside .check {
+  display: flex;
+  height: 40px;
+  border: 1px solid #000;
+}
+
+/* ------ プルダウン実装(group要素)について ------ */
+
+/*ボタン装飾*/
+.hidden_box label {
+  box-sizing: border-box;
+  width: 150px;
+  height: 40px;
+  padding: 4px 4px;
+  font-size: 14px;
+  border: 1px solid #000;
+  cursor :pointer;
+}
+
+/*ボタンホバー時*/
+.hidden_box label:hover {
+  background: #efefef;
+}
+
+/*チェックは見えなくする*/
+.hidden_box input {
+  display: none;
+}
+
+/*中身を非表示にしておく*/
+.hidden_box .hidden_show {
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.hidden_show ul >li {
+  border: 1px solid #000;
+}
+
+.hidden_box .hidden_show ul li {
+  height: 40px;
+}
+
+.hidden_box .hidden_show ul li a {
+  background: #dfdfdf;
+}
+
+/*クリックで中身表示*/
+.hidden_box input:checked ~ .hidden_show {
+  height: auto;
+  opacity: 1;
+}
+
+
+/* ------ ここからhover系(list要素)について ------ */
+
+.gnav {
+  margin-bottom: 20px;
+}
+
+.gnav > li {
+  display: flex;
+}
+
+.gnav li ul {
+  position: absolute;
+  z-index: 100;
+  height: 100%;
+  width: 150px;
+  top: 0;
+  left: 150px;
+  display: none;
+  transition: 0.5s;
+  background: #efefef;
+  border: 1px solid #000;
+}
+
+.gnav li:hover ul {
+  display: block;
+}
+
+.gnav li a {
+  display: block;
+  text-align: center;
+  height: 40px;
+  width: 100%;
+}
+
+.hidden_show ul >li {
+  border: 1px solid #000;
+}
+
+
+
+
+/* -------------------------------------------------------------- */
+.todo {
+  flex: 1;
+  margin-left: 10px;
+  border: 1px solid #000;
+}
+
+.sample {
+  width: 90%;
+  margin: 0 auto;
+  border: 1px solid #000;
+}
+
+
+/* -------------------------------------------------------------- */
+.doing {
+  flex: 1;
+  margin-left: 10px;
+  border: 1px solid #000;
+}
+
+
+/* -------------------------------------------------------------- */
+.done {
+  flex: 1;
+  margin-left: 10px;
+  // margin-right: 10px;
+  border: 1px solid #000;
 }

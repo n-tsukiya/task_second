@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
-    <title>SecondTask</title>
+    <title>タスク管理ツール</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,16 +10,31 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>  <!-- deviseのメソッドで、「ログインしているかしていないかでtrue or falseを返す」メソッド -->
-      <%= link_to "グループ新規作成", new_group_path %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      <%= link_to "マイページ", user_path(current_user.id) %>
-    <% else %>
-      <%= link_to "ユーザー新規登録", new_user_registration_path %>
-      <%= link_to "ログイン", new_user_session_path %>
-    <% end %>
-      <%= link_to "グループ一覧", groups_path %>
-      <%= link_to "ユーザー一覧", users_path %>
+    <header>
+      <div>
+        <h1>タスク管理ツール(仮)</h1>
+      </div>
+      <div>
+        <% if user_signed_in? %>  <!-- deviseのメソッドで、「ログインしているかしていないかでtrue or falseを返す」メソッド -->
+          <%= link_to "グループ新規作成", new_group_path %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          <%= link_to "マイページ", user_path(current_user.id) %>
+        <% else %>
+          <%= link_to "ユーザー新規登録", new_user_registration_path %>
+          <%= link_to "ログイン", new_user_session_path %>
+        <% end %>
+          <%= link_to "グループ一覧", groups_path %>
+          <%= link_to "ユーザー一覧", users_path %>
+      </div>
+    </header>
+
+    <main>
     <%= yield %>
+    </main>
+
+    <footer>
+      <h2>footer</h2>
+      <p>フッターはいらないかも</p>
+    </footer>
   </body>
 </html>

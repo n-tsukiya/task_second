@@ -1,6 +1,6 @@
 # README(プッシュとその内容を書き込んで行く)
 
-* 初期状態(プッシュし忘れ)
+## 初期状態(プッシュし忘れ)
   
 ```
 $ rails new second_task -d mysql --skip-active-storage --skip-action-mailer --skip-action-mailbox
@@ -12,7 +12,7 @@ $ rails new second_task -d mysql --skip-active-storage --skip-action-mailer --sk
   
   
 
-* userとgroupの多対多の実装まで
+## userとgroupの多対多の実装まで
   
 ```
 $ rails db:create
@@ -44,7 +44,7 @@ $ rails g controller user_groups
   
   
 
-* cssを任意のviewにのみ充てられるように実装
+## cssを任意のviewにのみ充てられるように実装
   
 cssを充てる前の1番最初のベースとしてpushした
 
