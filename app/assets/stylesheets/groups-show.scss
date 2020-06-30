@@ -1,0 +1,14 @@
+main {
+  display: block;
+}
+
+h1 {
+  font-size: 40px;
+}
+h1 + p {
+  margin-bottom: 50px;
+}
+
+// span {
+//   display: inline;
+// }

@@ -5,62 +5,74 @@
 <hr> %>
 
 <div class="aside">
-  <div class="check">
-    <input type="checkbox" id="test">
-    <h2>ホーム</h2>
+  <div class="username">
+    <% if user_signed_in? %>
+      <h2><%= current_user.username %></h2>
+    <% else %>
+      <h2>未ログイン</h2>
+    <% end %>
   </div>
 
-  <div class="hidden_box">
-    <label for="label1">>マイグループ</label>
-    <input type="checkbox" id="label1">
-    <div class="hidden_show">
-      <ul class="gnav">
-        <% @groups.each do |group| %>
-          <li>
-            <%= link_to group.title, groups_path(group.id) %>
-            <ul>
-              <li>
-                <input type="checkbox" id="label1-1">
-                <a href="">リスト1</a>
-              </li>
-              <li><a href="">サンプルリスト2</a></li>
-              <li><a href="">サンプルリスト3</a></li>
-              <li><a href="">サンプルリスト4</a></li>
-              <li><a href="">サンプルリスト5</a></li>
-            </ul>
-          </li>
-        <% end %>
-      </ul>
+  <% if user_signed_in? %>
+    <div class="check">
+      <input type="checkbox" id="test">
+      <h2>ホーム</h2>
     </div>
-  </div>
+
+    <div class="hidden_box">
+      <label for="label1">>マイグループ</label>
+      <input type="checkbox" id="label1">
+      <div class="hidden_show">
+        <ul class="gnav">
+          <% current_user.groups.each do |group| %>
+            <li>
+              <%= link_to group.title, group_path(group.id) %>
+              <ul>
+                <% group.lists.each do |list| %>
+                  <li><%= list.title %></li>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+
 
   <div class="check">
-    <%# <input type="checkbox" id="test"/> %>
+    <input type="checkbox" id="test"/>
     <h2>何かいれるかも</h2>
   </div>
 
   <div class="hidden_box">
-    <label for="label2">>全グループ</label>
+    <label for="label2">>未参加グループ</label>
     <input type="checkbox" id="label2">
     <div class="hidden_show">
       <ul class="gnav">
         <% @groups.each do |group| %>
-          <li>
-            <%= link_to group.title, groups_path(group.id) %>
-          </li>
+          <% unless group.grouped_by?(current_user) %>
+            <li>
+              <%= link_to group.title, group_path(group.id) %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     </div>
   </div>
 
   <div class="check">
-    <%# <input type="checkbox" id="test"/> %>
-    <h2>グループ新規作成</h2>
+    <%= link_to "グループ新規作成", new_group_path %>
   </div>
 
+  
+</div>
 
 
-  <% if false %>
+
+
+<% if false %>
 
   <% @groups.each do |group| %>
     <p><span>グループ名: </span><%= link_to group.title, groups_path(group.id) %></p>
@@ -89,9 +101,8 @@
     <%= form.submit %>
   <% end %>
 
-  <% end %>
+<% end %>
 
-</div>
 
 
 

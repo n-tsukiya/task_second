@@ -47,6 +47,21 @@ $ rails g controller user_groups
 ## cssを任意のviewにのみ充てられるように実装
   
 cssを充てる前の1番最初のベースとしてpushした
+  
+  
 
+## groups/index.html.erbのレイアウト面実装
+  
+cssをあてて体裁をある程度整えた  
+ここからlist,taskの実装に移る  
+
+## listモデルの実装かつ微調整
+  
+```
+$ rails g model List title:string color:string group_id:integer
+$ rails g controller lists index show create
+```
+  
+その他、modelやrouteの設定を行ってから実装した
 
 

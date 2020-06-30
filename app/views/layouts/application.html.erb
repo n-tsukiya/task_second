@@ -12,11 +12,10 @@
   <body>
     <header>
       <div>
-        <h1>タスク管理ツール(仮)</h1>
+        <h2>タスク管理ツール(仮)</h2>
       </div>
       <div>
         <% if user_signed_in? %>  <!-- deviseのメソッドで、「ログインしているかしていないかでtrue or falseを返す」メソッド -->
-          <%= link_to "グループ新規作成", new_group_path %>
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
           <%= link_to "マイページ", user_path(current_user.id) %>
         <% else %>

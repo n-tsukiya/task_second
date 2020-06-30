@@ -4,11 +4,13 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.all
     @group = Group.new
+    @user = current_user
   end
 
   def show
     @group = Group.find(params[:id])
-    @user = @group.users
+    @users = @group.users
+    @list = List.new
   end
 
   def new

@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'groups-show', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <h1>Groups#show(グループ詳細)</h1>
 <p>Find me in app/views/groups/show.html.erb</p>
 <hr>
@@ -5,6 +7,28 @@
 <p><span>グループ名: </span><%= @group.title %></p>
 <hr>
 
+<p><span>参加人数： </span><%= @group.user_groups.count %>人</p>
+<hr>
+
 <% @users.each do |user| %>
   <p><span>参加ユーザーメアド: </span><%= link_to user.email, user_path(user.id) %></p>
+<% end %>
+<hr>
+
+<% if @group.grouped_by?(current_user) %>
+
+  <p>リスト新規作成</p>
+  <%= form_with(model: [@group, @list], local: true, url: group_lists_path(@group)) do |form| %>
+    <p>
+      <%= form.label :title, "リスト名　" %>
+      <%= form.text_field :title %>
+      <br>
+      <%= form.label :color, "リストの色" %>
+      <%= form.text_field :color %>
+    </p>
+    <%= form.submit %>
+  <% end %>
+  <p><%= link_to "グループから退会", group_user_groups_path(@group.id), method: :delete %></p>
+<% else %>
+  <p><%= link_to "グループに参加", group_user_groups_path(@group.id), method: :post %></p>
 <% end %>
