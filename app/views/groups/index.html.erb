@@ -46,26 +46,45 @@
     <h2>何かいれるかも</h2>
   </div>
 
-  <div class="hidden_box">
-    <label for="label2">>未参加グループ</label>
-    <input type="checkbox" id="label2">
-    <div class="hidden_show">
-      <ul class="gnav">
-        <% @groups.each do |group| %>
-          <% unless group.grouped_by?(current_user) %>
-            <li>
-              <%= link_to group.title, group_path(group.id) %>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
+
+  <% if user_signed_in? %>
+    <div class="hidden_box">
+      <label for="label2">>未参加グループ</label>
+      <input type="checkbox" id="label2">
+      <div class="hidden_show">
+        <ul class="gnav">
+          <% @groups.each do |group| %>
+            <% unless group.grouped_by?(current_user) %>
+              <li>
+                <%= link_to group.title, group_path(group.id) %>
+              </li>
+            <% end %>
+            <% end %>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <div class="check">
-    <%= link_to "グループ新規作成", new_group_path %>
-  </div>
-
+    <div class="check">
+      <a href="" class="js-modal-open" data-target="modal01">新規グループ作成</a>
+      <div id="modal01" class="modal js-modal">
+        <div class="modal__bg js-modal-close"></div>
+        <div class="modal__content">
+          <h1>【新規グループ作成】</h1>
+          <%= form_with(model: @new_group, local: true, url: groups_path) do |form| %>
+            <p>
+              <%= form.label :title, "グループ名" %>
+              <%= form.text_field :title %>
+              <br>
+              <%= form.label :color, "グループの色" %>
+              <%= form.text_field :color %>
+            </p>
+            <%= form.submit %>
+          <% end %>
+          <a class="js-modal-close" href="">閉じる</a>
+        </div>
+      </div>
+    </div>
+  <% end %>
   
 </div>
 

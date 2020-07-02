@@ -54,6 +54,8 @@ cssを充てる前の1番最初のベースとしてpushした
   
 cssをあてて体裁をある程度整えた  
 ここからlist,taskの実装に移る  
+  
+  
 
 ## listモデルの実装かつ微調整
   
@@ -63,5 +65,19 @@ $ rails g controller lists index show create
 ```
   
 その他、modelやrouteの設定を行ってから実装した
+  
+  
+
+## modalウィンドウの実装
+
+https://qiita.com/masahisa/items/eaacb0c3b82f4a11fc13  
+上記を参考にjqueryを導入  
+  
+
+https://webdesignday.jp/inspiration/pickup/4680/  
+上記を参考にモーダルウィンドウを実装  
+  
+  
+
 
 

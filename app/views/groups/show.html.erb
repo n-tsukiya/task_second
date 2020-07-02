@@ -15,6 +15,15 @@
 <% end %>
 <hr>
 
+<% if @group.lists.exists? %>
+  <% @group.lists.each do |list| %>
+    <p><span>リスト名: </span><%= list.title %></p>
+  <% end %>
+<% else %>
+  <p>リストは現在登録されていません</p>
+<% end %>
+<hr>
+
 <% if @group.grouped_by?(current_user) %>
 
   <p>リスト新規作成</p>
