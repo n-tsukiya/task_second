@@ -1,2 +1,50 @@
-<h1>Lists#show</h1>
+<%= stylesheet_link_tag 'lists-show', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<h1>Lists#show(リスト詳細)</h1>
 <p>Find me in app/views/lists/show.html.erb</p>
+<hr>
+
+<p><span>リスト名: </span><%= @list.title %></p>
+<hr>
+<p><span>登録タスク数: </span><%= @list.tasks.count %>個</p>
+<hr>
+
+<% if @list.tasks.exists? %>
+  <% @list.tasks.each do |task| %>
+    <p><span>タスク名: </span><%= task.title %></p>
+  <% end %>
+<% else %>
+  <p>タスクは現在登録されていません</p>
+<% end %>
+<hr>
+
+<% @group.users.each do |user| %>
+  <p><%= user.username %></p>
+<% end %>
+
+<p>新規タスク作成</p>
+<%= form_with(model: [@list, @list.tasks.build], url: group_list_tasks_path(@group, @list), local: true) do |form| %>
+  <p>
+    <%= form.label :title, "タスクタイトル" %>
+    <%= form.text_field :title %>
+    <br>
+    <%= form.label :body, "タスク内容　　" %>
+    <%= form.text_area :body %>
+    <br>
+    <%= form.label :target_date, "終了予定日程　" %>
+    <%= form.date_field :target_date %>
+    <br>
+    <% if false %>
+      <%= form.label :test, "プルダウンテスト" %>
+      <%= form.select :test, [["1", "1"], ["2", "2"], ["3", "3"]] %>
+      <br>
+      <%= form.label :test, "作業者　　　" %>
+      <%= form.collection_select :test, @group.users.all, :prompt => "作業者を選択" %>
+    <% end %>
+  </p>
+  <br>
+  <%= form.submit %>
+<% end %>
+<br>
+<hr>
+<%= link_to ">戻る", groups_path %>

@@ -43,6 +43,7 @@
         $(this).on('click',function(){
           var target = $(this).data('target');
           var modal = document.getElementById(target);
+          // $(".gnav ul li").css("display", "none");
           $(modal).fadeIn(200);
           return false;
         });
@@ -51,6 +52,15 @@
         $('.js-modal').fadeOut(200);
         return false;
       });
+
+      // $(".gnav li").hover(
+      //   function() {
+      //   $("this ul").css("display", "block");
+      // },
+      // function() {
+      //   $("this").children("ul").css("display", "none");
+      // }
+      // )
     });
     </script>
   </body>

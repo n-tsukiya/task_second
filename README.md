@@ -78,6 +78,14 @@ https://webdesignday.jp/inspiration/pickup/4680/
 上記を参考にモーダルウィンドウを実装  
   
   
-
+## とりあえずの完成
+  
+```
+$ rails g model Task ~
+$ rails g controller tasks ~
+```
+タスクの実装
+チェックマーク等の実装
+ここからは全員で細かいミスを直していく
 
 

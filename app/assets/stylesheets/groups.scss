@@ -99,9 +99,19 @@
   text-align: center;
   height: 40px;
   width: 100%;
+  border: 1px solid #000;
 }
 
-.hidden_show ul >li {
+.gnav  li ul a {
+  width: 50%;
+}
+
+.gnav ul li {
+  display: flex;
+  flex-direction: row;
+}
+
+.hidden_show ul > li {
   border: 1px solid #000;
 }
 
@@ -118,7 +128,7 @@
 
 .sample {
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
   border: 1px solid #000;
 }
 

@@ -1,13 +1,10 @@
   <%= stylesheet_link_tag 'groups', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<%# <h1>Groups#index(グループ一覧)</h1>
-<p>Find me in app/views/groups/index.html.erb</p>
-<hr> %>
 
 <div class="aside">
   <div class="username">
     <% if user_signed_in? %>
-      <h2><%= current_user.username %></h2>
+      <h2 style="font-weight: bold"><%= current_user.username %></h2>
     <% else %>
       <h2>未ログイン</h2>
     <% end %>
@@ -26,10 +23,59 @@
         <ul class="gnav">
           <% current_user.groups.each do |group| %>
             <li>
+
+              <% if false %>
+                <a href="" class="js-modal-open" data-target="modal02"><%= group.title %></a>
+                <div id="modal02" class="modal js-modal">
+                  <div class="modal__bg js-modal-close"></div>
+                  <div class="modal__content">
+                    <%# ここからモーダルメニュー %>
+                    <h1><%= group.title %></h1>
+                    <hr>
+                    <p><span>グループ名: </span><%= group.title %></p>
+                    <hr>
+                    <p><span>参加人数： </span><%= group.user_groups.count %>人</p>
+                    <hr>
+                    <% group.users.each do |user| %>
+                    <p><span>参加ユーザー名: </span><%= user.username %></p>
+                    <% end %>
+                    <hr>
+                    <% if group.lists.exists? %>
+                      <% group.lists.each do |list| %>
+                        <p><span>登録リスト名: </span><%= list.title %></p>
+                      <% end %>
+                    <% else %>
+                      <p>リストは現在登録されていません</p>
+                    <% end %>
+                    <hr>
+                  </div>
+                </div>
+                <ul>
+                  <% if group.lists.exists? %>
+                    <% group.lists.each do |list| %>
+                      <li><%= list.title %></li>
+                    <% end %>
+                  <% else %>
+                    <li>リストはありません</li>
+                  <% end %>
+                </ul>
+              <% end %>
+
               <%= link_to group.title, group_path(group.id) %>
               <ul>
-                <% group.lists.each do |list| %>
-                  <li><%= list.title %></li>
+                <% if group.lists.exists? %>
+                  <% group.lists.each do |list| %>
+                    <li>
+                      <% if list.indication == 0 %>
+                        <%= link_to "○", switch_group_list_path(group,list) %>
+                      <% else %>
+                        <%= link_to "×", switch_group_list_path(group,list) %>
+                      <% end %>
+                      <%= link_to list.title, group_list_path(group,list) %>
+                    </li>
+                  <% end %>
+                <% else %>
+                  <li>リストはありません</li>
                 <% end %>
               </ul>
             </li>
@@ -49,7 +95,7 @@
 
   <% if user_signed_in? %>
     <div class="hidden_box">
-      <label for="label2">>未参加グループ</label>
+      <label for="label2">>未参加グループ名</label>
       <input type="checkbox" id="label2">
       <div class="hidden_show">
         <ul class="gnav">
@@ -59,7 +105,7 @@
                 <%= link_to group.title, group_path(group.id) %>
               </li>
             <% end %>
-            <% end %>
+          <% end %>
         </ul>
       </div>
     </div>
@@ -69,6 +115,7 @@
       <div id="modal01" class="modal js-modal">
         <div class="modal__bg js-modal-close"></div>
         <div class="modal__content">
+          <%# ここからモーダルメニュー %>
           <h1>【新規グループ作成】</h1>
           <%= form_with(model: @new_group, local: true, url: groups_path) do |form| %>
             <p>
@@ -134,26 +181,70 @@
 <div class="todo">
   <h3>todo</h3>
   <hr>
-  <div class="sample">
-    <h4>サンプルタイトル</h4>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo odio accusamus quasi iure. Eum facilis temporibus explicabo inventore autem optio, sit, libero modi, quisquam distinctio suscipit hic molestiae sapiente! Laudantium.</p>
-  </div>
+  <% @groups.each do |group| %>
+    <% group.lists.each do |list| %>
+      <% if list.indication == 1 %>
+        <% list.tasks.each do |task| %>
+          <% if task.todo == 0 %>
+            <div class="sample">
+              <h4>タスクタイトル：「<%= task.title %>」(リスト：<%= list.title %>)</h4>
+              <hr>
+              <p>内容：<%= task.body %></p>
+              <hr>
+              <p>締切：<%= task.target_date %></p>
+              <hr>
+              <p><%= link_to "doingに移動", change_group_list_task_path(group, list, task) %></p>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
 
 <div class="doing">
   <h3>doing</h3>
   <hr>
-  <div class="sample">
-    <h4>サンプルタイトル</h4>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo odio accusamus quasi iure. Eum facilis temporibus explicabo inventore autem optio, sit, libero modi, quisquam distinctio suscipit hic molestiae sapiente! Laudantium.</p>
-  </div>
+  <% @groups.each do |group| %>
+    <% group.lists.each do |list| %>
+      <% if list.indication == 1 %>
+        <% list.tasks.each do |task| %>
+          <% if task.todo == 1 %>
+            <div class="sample">
+              <h4>タスクタイトル：「<%= task.title %>」(リスト：<%= list.title %>)</h4>
+              <hr>
+              <h4>リストタイトル：「<%= list.title %>」</h4>
+              <hr>
+              <p>内容：<%= task.body %></p>
+              <p><%= link_to "doneに移動", change_group_list_task_path(group, list, task) %></p>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
 
 <div class="done">
   <h3>done</h3>
   <hr>
-  <div class="sample">
-    <h4>サンプルタイトル</h4>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo odio accusamus quasi iure. Eum facilis temporibus explicabo inventore autem optio, sit, libero modi, quisquam distinctio suscipit hic molestiae sapiente! Laudantium.</p>
-  </div>
+  <% @groups.each do |group| %>
+    <% group.lists.each do |list| %>
+      <% if list.indication == 1 %>
+        <% list.tasks.each do |task| %>
+          <% if task.todo == 2 %>
+            <div class="sample">
+              <h4>タスクタイトル：「<%= task.title %>」</h4>
+              <hr>
+              <h4>リストタイトル：「<%= list.title %>」</h4>
+              <hr>
+              <p>内容：<%= task.body %></p>
+              <hr>
+              <p><%= link_to "タスクをリストから削除", group_list_task_path(group, list, task), method: :delete, data:{ confirm: 'Sure?'} %></p>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>

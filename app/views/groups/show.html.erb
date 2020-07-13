@@ -35,9 +35,15 @@
       <%= form.label :color, "リストの色" %>
       <%= form.text_field :color %>
     </p>
-    <%= form.submit %>
+    <br>
+  <%= form.submit %>
   <% end %>
+  <br>
   <p><%= link_to "グループから退会", group_user_groups_path(@group.id), method: :delete %></p>
 <% else %>
   <p><%= link_to "グループに参加", group_user_groups_path(@group.id), method: :post %></p>
 <% end %>
+<hr>
+<br>
+
+<%= link_to ">戻る", groups_path %>
