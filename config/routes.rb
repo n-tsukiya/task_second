@@ -7,11 +7,11 @@ Rails.application.routes.draw do
   resources :users
   resources :groups do
     resource :user_groups, only: [:create, :destroy]
-    resources :lists, only: [:show, :create, :destroy] do
+    resources :lists, only: [:show, :create, :destroy, :edit, :update] do
       member do
         get :switch
       end
-      resources :tasks, only: [:create, :destroy] do 
+      resources :tasks, only: [:create, :destroy] do
         member do
           get :change
         end

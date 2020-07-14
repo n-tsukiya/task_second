@@ -18,6 +18,21 @@ class ListsController < ApplicationController
   end
 
   def edit
+    @group = Group.find(params[:group_id])
+    @list = List.find(params[:id])
+  end
+
+  def update
+    @group = Group.find(params[:group_id])
+    @list = List.find(params[:id])
+    @list.update(params.require(:list).permit(:title, :color))
+    redirect_to group_path(@group)
+  end
+
+  def destroy
+    @list = List.find(params[:id])
+    @list.destroy
+    redirect_to groups_path
   end
 
   def switch

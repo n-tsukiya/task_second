@@ -1,2 +1,20 @@
+<%= stylesheet_link_tag 'lists-show', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <h1>Lists#edit</h1>
 <p>Find me in app/views/lists/edit.html.erb</p>
+
+
+
+<p>リスト編集</p>
+<%= form_with(model: [@group, @list], local: true, url: group_list_path(@group)) do |form| %>
+  <p>
+    <%= form.label :title, "リスト名　" %>
+    <%= form.text_field :title %>
+    <br>
+    <%= form.label :color, "リストの色" %>
+    <%= form.text_field :color %>
+  </p>
+  <br>
+<%= form.submit "編集する"%>
+<% end %>
+<br>

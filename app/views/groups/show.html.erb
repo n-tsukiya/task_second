@@ -17,7 +17,11 @@
 
 <% if @group.lists.exists? %>
   <% @group.lists.each do |list| %>
-    <p><span>リスト名: </span><%= list.title %></p>
+    <p>
+      <span>リスト名: </span><%= link_to list.title, group_list_path(@group, list), method: :get %>
+      <%= link_to "[編集]", edit_group_list_path(@group, list), method: :get %>
+      <%= link_to "[削除]", group_list_path(@group, list), method: :delete, data:{ confirm: 'Sure?'} %>
+    </p>
   <% end %>
 <% else %>
   <p>リストは現在登録されていません</p>
